@@ -1,35 +1,20 @@
-Exercícios com CHARINDEX
-1️⃣ Encontrar a posição do caractere '@' nos e-mails da tabela clientes
+# 📌 Exercícios de SQL - CHARINDEX, PATINDEX e IIF
 
-2️⃣ Extrair o nome do usuário do e-mail antes do '@' na tabela clientes
+Este repositório contém exercícios práticos para treinar funções SQL no SQL Server, incluindo `CHARINDEX`, `PATINDEX` e `IIF`.
 
-3️⃣ Descobrir a posição do primeiro traço '-' em números de telefone na tabela clientes
+## 📋 Sobre os Exercícios
+Os exercícios estão organizados para ajudar a entender e praticar:
 
-Exercícios com PATINDEX
-4️⃣ Encontrar a posição da palavra 'Promoção' na coluna descricao da tabela produtos
+- 🔍 **CHARINDEX**: Localiza a posição de uma string dentro de outra.
+- 🔍 **PATINDEX**: Encontra padrões dentro de um texto utilizando expressões como `%` e `[...]`.
+- ✅ **IIF**: Avaliação condicional simples, semelhante ao `IF-ELSE`.
 
-5️⃣ Verificar se um telefone segue um padrão específico (exemplo: '(99) 9999-9999') na tabela clientes
+Cada exercício propõe uma consulta SQL que pode ser executada no SQL Server.
 
-6️⃣ Encontrar produtos onde a descrição começa com um número na tabela produtos
+## 📂 Estrutura das Tabelas
+Antes de iniciar os exercícios, crie as seguintes tabelas no seu banco de dados:
 
-Exercícios com IIF
-7️⃣ Classificar clientes como 'VIP' se gasto_total > 1000, senão 'Comum' na tabela clientes
-
-8️⃣ Verificar estoque crítico: se quantidade for menor que 5, retornar 'Estoque Baixo', senão 'Estoque Ok' na tabela produtos
-
-9️⃣ Verificar status de pagamento: se valor_pago >= valor_total, exibir 'Pago', senão 'Pendente' na tabela pedidos
-
-🔟 Verificar se um pedido está atrasado: se data_entrega < GETDATE(), retornar 'Atrasado', senão 'No Prazo' na tabela pedidos
-
-🔥 Desafio Final
-📌 Criar um relatório que:
-✅ Exibe o primeiro nome do cliente extraído do campo nome
-✅ Indica se o cliente é 'VIP' ou 'Comum' com base no gasto_total
-✅ Verifica se o e-mail contém 'gmail' usando PATINDEX
-
-
-Criação das tabelas
-```
+```sql
 CREATE TABLE clientes (
     id_cliente INT PRIMARY KEY IDENTITY(1,1),
     nome VARCHAR(100),
@@ -55,3 +40,58 @@ CREATE TABLE pedidos (
     valor_pago DECIMAL(10,2)
 );
 ```
+
+## 🔹 Populando as Tabelas
+Antes de executar as queries, insira alguns dados de exemplo:
+
+```sql
+INSERT INTO clientes (nome, email, telefone, gasto_total) VALUES
+('Carlos Silva', 'carlos.silva@gmail.com', '(11) 98765-4321', 1200.50),
+('Mariana Costa', 'mariana.costa@yahoo.com', '(21) 99876-5432', 800.75),
+('Roberto Souza', 'roberto.souza@gmail.com', '(31) 91234-5678', 1500.00),
+('Ana Oliveira', 'ana.oliveira@outlook.com', '(41) 93456-7890', 300.40),
+('Fernanda Lima', 'fernanda.lima@gmail.com', '(51) 92345-6789', 2200.00);
+```
+
+```sql
+INSERT INTO produtos (nome_produto, descricao, quantidade, preco) VALUES
+('Notebook Dell', 'Notebook Dell i7 com SSD - Promoção', 10, 4500.99),
+('Mouse Gamer', 'Mouse óptico RGB para jogos', 25, 150.50),
+('Teclado Mecânico', 'Teclado mecânico com LED azul', 15, 350.00),
+('Monitor 24"', 'Monitor Full HD 24 polegadas - Promoção', 8, 799.90),
+('Cadeira Gamer', 'Cadeira ergonômica para jogos', 5, 1200.00);
+```
+
+```sql
+INSERT INTO pedidos (id_cliente, data_pedido, data_entrega, valor_total, valor_pago) VALUES
+(1, '2025-03-01', '2025-03-10', 4500.99, 4500.99),
+(2, '2025-03-05', '2025-03-15', 800.75, 400.00),
+(3, '2025-03-08', '2025-03-18', 1500.00, 1500.00),
+(4, '2025-03-10', '2025-03-20', 300.40, 300.40),
+(5, '2025-03-12', '2025-03-22', 2200.00, 1000.00);
+```
+
+## 📝 Exercícios
+
+### 📌 Exercícios com `CHARINDEX`
+1. Encontrar a posição do caractere `'@'` nos e-mails da tabela `clientes`.
+2. Extrair o nome do usuário do e-mail antes do `'@'` na tabela `clientes`.
+3. Descobrir a posição do primeiro traço `'-'` em números de telefone na tabela `clientes`.
+
+### 📌 Exercícios com `PATINDEX`
+4. Encontrar a posição da palavra `'Promoção'` na coluna `descricao` da tabela `produtos`.
+5. Verificar se um telefone segue um padrão específico (exemplo: `'(99) 9999-9999'`) na tabela `clientes`.
+6. Encontrar produtos onde a descrição começa com um número na tabela `produtos`.
+
+### 📌 Exercícios com `IIF`
+7. Classificar clientes como `'VIP'` se `gasto_total > 1000`, senão `'Comum'` na tabela `clientes`.
+8. Verificar estoque crítico: se `quantidade` for menor que 5, retornar `'Estoque Baixo'`, senão `'Estoque Ok'` na tabela `produtos`.
+9. Verificar status de pagamento: se `valor_pago >= valor_total`, exibir `'Pago'`, senão `'Pendente'` na tabela `pedidos`.
+10. Verificar se um pedido está atrasado: se `data_entrega < GETDATE()`, retornar `'Atrasado'`, senão `'No Prazo'` na tabela `pedidos`.
+
+### 🚀 Desafio Final
+Crie um relatório que:
+- Exiba o primeiro nome do cliente extraído do campo `nome`.
+- Indique se o cliente é `'VIP'` ou `'Comum'` com base no `gasto_total`.
+- Verifique se o e-mail contém `'gmail'` usando `PATINDEX`.
+
