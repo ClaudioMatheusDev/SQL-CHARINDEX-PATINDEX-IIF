@@ -1,0 +1,57 @@
+Exercícios com CHARINDEX
+1️⃣ Encontrar a posição do caractere '@' nos e-mails da tabela clientes
+
+2️⃣ Extrair o nome do usuário do e-mail antes do '@' na tabela clientes
+
+3️⃣ Descobrir a posição do primeiro traço '-' em números de telefone na tabela clientes
+
+Exercícios com PATINDEX
+4️⃣ Encontrar a posição da palavra 'Promoção' na coluna descricao da tabela produtos
+
+5️⃣ Verificar se um telefone segue um padrão específico (exemplo: '(99) 9999-9999') na tabela clientes
+
+6️⃣ Encontrar produtos onde a descrição começa com um número na tabela produtos
+
+Exercícios com IIF
+7️⃣ Classificar clientes como 'VIP' se gasto_total > 1000, senão 'Comum' na tabela clientes
+
+8️⃣ Verificar estoque crítico: se quantidade for menor que 5, retornar 'Estoque Baixo', senão 'Estoque Ok' na tabela produtos
+
+9️⃣ Verificar status de pagamento: se valor_pago >= valor_total, exibir 'Pago', senão 'Pendente' na tabela pedidos
+
+🔟 Verificar se um pedido está atrasado: se data_entrega < GETDATE(), retornar 'Atrasado', senão 'No Prazo' na tabela pedidos
+
+🔥 Desafio Final
+📌 Criar um relatório que:
+✅ Exibe o primeiro nome do cliente extraído do campo nome
+✅ Indica se o cliente é 'VIP' ou 'Comum' com base no gasto_total
+✅ Verifica se o e-mail contém 'gmail' usando PATINDEX
+
+
+Criação das tabelas
+```
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY IDENTITY(1,1),
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    gasto_total DECIMAL(10,2)
+);
+
+CREATE TABLE produtos (
+    id_produto INT PRIMARY KEY IDENTITY(1,1),
+    nome_produto VARCHAR(100),
+    descricao TEXT,
+    quantidade INT,
+    preco DECIMAL(10,2)
+);
+
+CREATE TABLE pedidos (
+    id_pedido INT PRIMARY KEY IDENTITY(1,1),
+    id_cliente INT FOREIGN KEY REFERENCES clientes(id_cliente),
+    data_pedido DATE,
+    data_entrega DATE,
+    valor_total DECIMAL(10,2),
+    valor_pago DECIMAL(10,2)
+);
+```
